@@ -1,0 +1,34 @@
+// Criação do dotnet
+dotnet new console -n AgendaTelefonicaComBancoDeDados -f net6.0
+
+// Entity Framework
+dotnet tool install --global dotnet-ef
+
+// Framework para trabalhar com MySql
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.0
+
+// Pacote Design do Entity Framework
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.0
+
+***************************************************
+Criar pasta Model e inserir as classes (Agenda)
+===================================================
+
+Configuração para conexão com o Banco de Dados:
+* Criar pasta Context
+* Criar uma classe (DataBaseContext) e herdar de DbContext (public class DataBaseContext : DbContext)
+* Criar uma propriedade DbSet da classe e atribuir um nome: public DbSet<Agenda> Agendas { get; set; }
+* Criar método para conexão com o Banco de Dados. Informar O banco de Dados, porta, nome, senha e servidor
+* 
+// Fazer Migration.  
+// Se for a primeira vez, uma pasta Migrations será criada.
+// Demais vezes apenas atualiza a nova estrtura do banco, por exemplo adicionar mais tabelas
+// Entre as aspas coloca-se algum comentário para versionar (como se fosse o commit do Git)
+dotnet ef migrations add "Primeira Migration"
+
+//Atualiza as modificações das tabelas para o banco de dados
+dotnet ef database update
+
+// Se for necessário acrescentar mais uma tabela, deve-se acrescentar mais uma classe e criar mais uma propriedade DbSet na pasta Context (Como feito anteriormente)
+
+
